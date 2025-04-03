@@ -2,13 +2,12 @@
 
 class PostsController < ApplicationController
   def index
-    posts = Post.all
+    posts = Post.order(id: :desc)
     render status: :ok, json: { posts: }
   end
 
   def create
-    post = Post.new(post_params)
-    post.save!
+    Post.create!(post_params)
     render_notice(t("successfully_created"))
   end
 
