@@ -1,16 +1,18 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
+import logo from "../../assets/images/blogger";
+
 const NavBar = () => (
-  <div className="flex h-screen flex-col gap-4 border-r p-2">
-    <div className="mb-6 mt-6 flex justify-center">
-      <div className="h-8 w-8 overflow-hidden rounded-full">
-        <img
-          alt="logo"
-          className="h-full w-full object-cover"
-          src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3b/7d/a6/3b7da699-8c08-0200-bcc4-71de05c1eee0/AppIconV2-0-0-1x_U007epad-0-0-sRGB-85-220.png/434x0w.webp"
-        />
-      </div>
-    </div>
+  <div className="flex h-screen w-20 flex-col items-center border-r py-6">
+    <img alt="logo" className="h-8 w-8" src={logo} />
+    <Link className="mt-3" to="/">
+      <i className="ri-home-3-line text-3xl" />
+    </Link>
+    <Link className="mt-3" to="/posts/create">
+      <i className="ri-add-fill text-3xl" />
+    </Link>
   </div>
 );
 
