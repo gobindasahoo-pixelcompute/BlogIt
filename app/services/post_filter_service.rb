@@ -2,8 +2,8 @@
 
 class PostFilterService
   attr_reader :posts, :params
-  def initialize(current_user:, params:)
-    @posts = current_user.posts.includes(:categories).order(id: :desc)
+  def initialize(current_organization:, params:)
+    @posts = current_organization.posts.order(id: :desc)
     @params = params
   end
 

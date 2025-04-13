@@ -2,7 +2,7 @@
 
 class PostsController < ApplicationController
   def index
-    @posts = PostFilterService.new(current_user:, params:).process!
+    @posts = PostFilterService.new(current_organization:, params:).process!
   end
 
   def create
