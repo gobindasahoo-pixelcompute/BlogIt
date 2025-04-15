@@ -12,7 +12,7 @@ const Button = ({
   buttonText,
   onClick = noop,
   loading,
-  className = "",
+  className = "cursor-pointer",
   icon,
   disabled = false,
 }) => {
@@ -28,13 +28,13 @@ const Button = ({
       type={type}
       className={classnames(
         [className],
-        "group relative flex items-center justify-center gap-x-2 rounded-md border border-transparent text-sm  font-medium leading-5 transition duration-150 ease-in-out focus:outline-none",
+        "group relative flex items-center justify-center gap-x-2 rounded border border-black text-sm  font-medium leading-5 transition duration-150 ease-in-out focus:outline-none",
         {
           "px-8 py-1": size === "medium",
-          "px-6 py-0.5": size === "small",
+          "px-2 py-1": size === "small",
           "bg-black text-white hover:bg-black/90":
             !loading && style === "primary",
-          "bg-gray-200 text-gray-800 hover:bg-gray-300":
+          "bg-white text-gray-800 hover:bg-gray-100":
             !loading && style === "secondary",
           "bg-gray-300 text-gray-800": loading,
           "cursor-wait": loading,

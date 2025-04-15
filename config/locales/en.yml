@@ -29,7 +29,7 @@
 
 en:
   generic_error: "Something went wrong. Please try again later."
-  successfully_created: "Post was successfully created!"
+  successfully_created: "%{entity} was successfully created!"
   post:
     slug:
       immutable: "is immutable!"

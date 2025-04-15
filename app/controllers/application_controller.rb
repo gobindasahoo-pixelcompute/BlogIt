@@ -61,4 +61,14 @@ class ApplicationController < ActionController::Base
   def render_json(json = {}, status = :ok)
     render status:, json:
   end
+
+  private
+
+    def current_user
+      @_current_user ||= User.first
+    end
+
+    def current_organization
+      @_current_organization ||= current_user.organization
+    end
 end

@@ -3,7 +3,7 @@ import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
-const TextArea = ({
+const Textarea = ({
   type = "text",
   label,
   value,
@@ -38,7 +38,7 @@ const TextArea = ({
   </div>
 );
 
-TextArea.propTypes = {
+Textarea.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.node,
@@ -47,4 +47,4 @@ TextArea.propTypes = {
   required: PropTypes.bool,
 };
 
-export default TextArea;
+export default Textarea;
