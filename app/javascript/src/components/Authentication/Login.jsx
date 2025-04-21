@@ -20,6 +20,7 @@ const Login = () => {
         email: email.toLowerCase(),
         userId: response.data.id,
         userName: response.data.name,
+        organizationId: response.data.organization_id,
       });
       setAuthHeaders();
       window.location.href = "/";

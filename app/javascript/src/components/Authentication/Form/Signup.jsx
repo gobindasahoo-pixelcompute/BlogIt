@@ -2,6 +2,7 @@ import React from "react";
 
 import { Button, Input } from "components/commons";
 import { Link } from "react-router-dom";
+import Select from "react-select";
 
 const Signup = ({
   handleSubmit,
@@ -10,24 +11,18 @@ const Signup = ({
   setPassword,
   loading,
   setPasswordConfirmation,
+  setOrganization,
+  organizations,
 }) => (
-  <div
-    className="flex min-h-screen items-center justify-center bg-gray-50
-    px-4 py-12 sm:px-6 lg:px-8 "
-  >
+  <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8 ">
     <div className="w-full max-w-md">
-      <h2
-        className="mt-6 text-center text-3xl font-extrabold
-        leading-9 text-gray-700"
-      >
+      <h2 className="mt-6 text-center text-3xl font-extrabold leading-9 text-gray-700">
         Sign Up
       </h2>
       <div className="text-center">
         <Link
+          className="mt-2 text-center text-sm font-medium text-bb-purple transition duration-150 ease-in-out focus:underline focus:outline-none"
           to="/"
-          className="mt-2 text-center text-sm font-medium
-            text-bb-purple transition duration-150 ease-in-out
-            focus:underline focus:outline-none"
         >
           Or Login Now
         </Link>
@@ -44,6 +39,20 @@ const Signup = ({
           type="email"
           onChange={e => setEmail(e.target.value)}
         />
+        <div className="mt-1 w-full">
+          <label className="text-sm">Organization</label>
+          <Select
+            isSearchable
+            className="text-sm"
+            menuPosition="fixed"
+            placeholder="Search organization"
+            options={organizations.map(organization => ({
+              label: organization.name,
+              value: organization.id,
+            }))}
+            onChange={e => setOrganization(e.value)}
+          />
+        </div>
         <Input
           label="Password"
           placeholder="********"

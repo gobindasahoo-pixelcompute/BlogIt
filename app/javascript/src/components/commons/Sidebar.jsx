@@ -10,7 +10,7 @@ import Category from "../Category";
 
 const Sidebar = () => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [isAvatarOpen, setIsAvatarOpen] = useState(true);
+  const [isAvatarOpen, setIsAvatarOpen] = useState(false);
   const userName = getFromLocalStorage("authUserName");
   const userEmail = getFromLocalStorage("authEmail");
 

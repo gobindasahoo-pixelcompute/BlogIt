@@ -7,13 +7,17 @@ import { formatPost } from "./utils";
 
 import { categoriesApi } from "../../apis/categories";
 import postsApi from "../../apis/posts";
+import { getFromLocalStorage } from "../../utils/storage";
 
-const Create = ({ history }) => {
+const CreatePost = ({ history }) => {
+  const userId = getFromLocalStorage("authUserId");
+  const organizationId = getFromLocalStorage("authUserOrganizationId");
+
   const [post, setPost] = useState({
     title: "",
     description: "",
-    user_id: 1,
-    organization_id: 1,
+    user_id: userId,
+    organization_id: organizationId,
     category_ids: [],
   });
   const [loading, setLoading] = useState(false);
@@ -55,4 +59,4 @@ const Create = ({ history }) => {
   );
 };
 
-export default Create;
+export default CreatePost;
