@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Input } from "@bigbinary/neetoui";
+import { Input } from "@bigbinary/neetoui";
 import classNames from "classnames";
 import { includes } from "ramda";
 
@@ -71,24 +71,26 @@ const Category = () => {
           onChange={e => setSearchTerm(e.target.value)}
         />
       )}
-      <div className="mt-8 flex h-[96%] flex-col gap-4 overflow-y-scroll">
+      <ul className="mt-8 flex h-[96%] flex-col gap-4 overflow-y-scroll">
         {categories
           .filter(category =>
             category.name.toLowerCase().includes(searchTerm.toLowerCase())
           )
           .map(category => (
-            <Button
+            <li
               key={category.id}
-              style="secondary"
-              className={classNames("border text-left shadow-sm", {
-                "bg-white": includes(category.id, clickedCategories),
-              })}
+              className={classNames(
+                "cursor-pointer rounded border px-2 py-0.5 text-left",
+                {
+                  "bg-white": includes(category.id, clickedCategories),
+                }
+              )}
               onClick={() => toggleClickedCategories(category.id)}
             >
               {category.name}
-            </Button>
+            </li>
           ))}
-      </div>
+      </ul>
       <Modal
         {...{
           isModalOpen,

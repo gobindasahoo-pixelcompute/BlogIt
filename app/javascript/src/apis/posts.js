@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const fetch = ({ category_ids }) =>
-  axios.get("/posts", { params: { category_ids } });
+const fetch = ({ category_ids, organization_id }) =>
+  axios.get("/posts", { params: { category_ids, organization_id } });
 
 const create = payload => axios.post("/posts", { post: payload });
 

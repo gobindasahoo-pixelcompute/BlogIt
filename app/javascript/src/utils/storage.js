@@ -5,14 +5,11 @@ const setToLocalStorage = ({
   userName,
   organizationId,
 }) => {
-  localStorage.setItem("authToken", JSON.stringify(authToken));
-  localStorage.setItem("authEmail", JSON.stringify(email));
-  localStorage.setItem("authUserId", JSON.stringify(userId));
-  localStorage.setItem("authUserName", JSON.stringify(userName));
-  localStorage.setItem(
-    "authUserOrganizationId",
-    JSON.stringify(organizationId)
-  );
+  localStorage.setItem("authToken", authToken);
+  localStorage.setItem("authEmail", email);
+  localStorage.setItem("authUserId", userId);
+  localStorage.setItem("authUserName", userName);
+  localStorage.setItem("authUserOrganizationId", organizationId);
 };
 
 const getFromLocalStorage = key => {
@@ -23,4 +20,12 @@ const getFromLocalStorage = key => {
   }
 };
 
-export { setToLocalStorage, getFromLocalStorage };
+const resetLocalStorage = () => {
+  localStorage.removeItem("authToken");
+  localStorage.removeItem("authEmail");
+  localStorage.removeItem("authUserId");
+  localStorage.removeItem("authUserName");
+  localStorage.removeItem("authUserOrganizationId");
+};
+
+export { setToLocalStorage, getFromLocalStorage, resetLocalStorage };

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
-import { Dropdown } from "@bigbinary/neetoui";
+import authApi from "apis/auth";
+import { resetAuthTokens } from "apis/axios";
 import classNames from "classnames";
-import { NavLink, Link } from "react-router-dom";
-import { getFromLocalStorage } from "utils/storage";
+import { NavLink, Link, useHistory } from "react-router-dom";
+import { getFromLocalStorage, resetLocalStorage } from "utils/storage";
 
 import { logo, avatar } from "../../assets";
 import Category from "../Category";
@@ -13,6 +14,18 @@ const Sidebar = () => {
   const [isAvatarOpen, setIsAvatarOpen] = useState(false);
   const userName = getFromLocalStorage("authUserName");
   const userEmail = getFromLocalStorage("authEmail");
+  const history = useHistory();
+
+  const handleLogout = async () => {
+    try {
+      await authApi.logout();
+      resetLocalStorage();
+      resetAuthTokens();
+      history.push("/login");
+    } catch (error) {
+      logger.error(error);
+    }
+  };
 
   return (
     <div className="flex">
@@ -43,9 +56,7 @@ const Sidebar = () => {
             <button
               className={classNames(
                 "cursor-pointer rounded-lg border-none bg-white px-2 py-1",
-                {
-                  "bg-gray-100": isCategoryOpen,
-                }
+                { "bg-gray-100": isCategoryOpen }
               )}
               onClick={() => setIsCategoryOpen(prev => !prev)}
             >
@@ -53,19 +64,14 @@ const Sidebar = () => {
             </button>
           </div>
         </div>
-        <button onClick={() => setIsAvatarOpen(prev => !prev)}>
-          {userName && <img alt="Avatar" className="h-8 w-8" src={avatar} />}
-        </button>
+        {userName && (
+          <button onClick={() => setIsAvatarOpen(prev => !prev)}>
+            <img alt="Avatar" className="h-8 w-8" src={avatar} />
+          </button>
+        )}
       </div>
-      <Dropdown
-        buttonStyle="text"
-        icon={avatar}
-        isOpen={isAvatarOpen}
-        position="right-end"
-        strategy="absolute"
-        onClick={() => setIsAvatarOpen(prev => !prev)}
-      >
-        <div className="flex flex-col gap-2 px-4 py-2">
+      {isAvatarOpen && (
+        <div className="absolute bottom-8 left-20 flex flex-col gap-2 rounded border bg-white px-4 py-2 shadow-xl">
           <div className="flex gap-2">
             <img alt="Avatar" className="h-12 w-12" src={avatar} />
             <div>
@@ -74,12 +80,12 @@ const Sidebar = () => {
             </div>
           </div>
           <hr />
-          <button className="flex gap-2">
+          <button className="flex gap-2" onClick={handleLogout}>
             <i className="ri-arrow-left-line" />
             <p className="text-xs font-semibold">Logout</p>
           </button>
         </div>
-      </Dropdown>
+      )}
       {isCategoryOpen && <Category />}
     </div>
   );

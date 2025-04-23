@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-json.posts @posts do |post|
-  json.(post, :id, :title, :description, :user_id, :organization_id, :created_at, :updated_at, :slug)
-
-  json.categories post.categories do |category|
-    json.(category, :id, :name)
-  end
-
+json.array! @posts do |post|
+  json.extract! post, :id, :title, :description, :slug, :created_at, :updated_at
   json.user do
-    json.(post.user, :id, :name)
+    json.extract! post.user, :id, :name, :email
   end
+  json.organization do
+    json.extract! post.organization, :id, :name
+  end
+  json.categories post.categories, :id, :name
 end

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { NoData } from "@bigbinary/neetoui";
 import Logger from "js-logger";
 import { Link } from "react-router-dom";
+import { getFromLocalStorage } from "utils/storage";
 
 import Card from "./Card";
 
@@ -15,13 +16,15 @@ const List = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const { clickedCategories } = usePostsStore();
+  const organization_id = getFromLocalStorage("authUserOrganizationId");
 
   const fetchPosts = async () => {
     try {
       const { data } = await postsApi.fetch({
         category_ids: clickedCategories,
+        organization_id,
       });
-      setPosts(data.posts);
+      setPosts(data);
     } catch (error) {
       Logger.log("Error:", error);
     } finally {
