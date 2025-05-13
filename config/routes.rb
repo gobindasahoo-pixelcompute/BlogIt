@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :categories, only: %i[index create]
     resource :session, only: [:create, :destroy]
     resources :user_posts, only: [:index]
+    resources :organizations, only: :index
   end
   root "home#index"
   get "*path", to: "home#index", via: :all
