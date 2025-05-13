@@ -9,12 +9,45 @@ export const formatPost = post => {
   return { ...post, title: newTitle, description: newDescription };
 };
 
-export const formatDate = created_at => {
-  const createdAt = new Date(created_at).toLocaleDateString("en-GB", {
+export const formatDate = created_at =>
+  new Date(created_at).toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "long",
     year: "numeric",
   });
 
-  return createdAt;
+export const formatDraftTime = time => {
+  const date = new Date(time);
+
+  const timeString = date
+    .toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    })
+    .replace(" ", "");
+
+  const day = date.getDate();
+  const month = date.toLocaleString("en-US", { month: "long" });
+  const year = date.getFullYear();
+
+  return `${timeString}, ${day} ${month} ${year}`;
+};
+
+export const formatPublishTime = time => {
+  const date = new Date(time);
+
+  const timeString = date
+    .toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    })
+    .replace(" ", "");
+
+  const day = date.getDate();
+  const month = date.toLocaleString("en-US", { month: "long" });
+  const year = date.getFullYear();
+
+  return `${month} ${day} ${year}, ${timeString}`;
 };

@@ -1,6 +1,6 @@
 import { Toastr } from "@bigbinary/neetoui";
 import axios from "axios";
-import { setToLocalStorage, getFromLocalStorage } from "utils/storage";
+import { resetLocalStorage, getFromLocalStorage } from "utils/storage";
 
 const DEFAULT_ERROR_NOTIFICATION = "Something went wrong!";
 
@@ -35,7 +35,7 @@ const handleSuccessResponse = response => {
 
 const handleErrorResponse = axiosErrorObject => {
   if (axiosErrorObject.response?.status === 401) {
-    setToLocalStorage({ authToken: null, email: null, userId: null });
+    resetLocalStorage();
     setTimeout(() => (window.location.href = "/"), 2000);
   }
 

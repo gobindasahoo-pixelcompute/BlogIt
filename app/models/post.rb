@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
+  scope :owned_by_current_user, -> (user) { where(user_id: user.id) }
+
   MAX_TITLE_LENGTH = 125
   MAX_DESCRIPTION_LENGTH = 10000
+  enum :status, { draft: "draft", publish: "publish" }, default: :draft
+
   has_and_belongs_to_many :categories
   belongs_to :user
   belongs_to :organization
+
   validates :title,
     presence: true,
     length: { maximum: MAX_TITLE_LENGTH }
