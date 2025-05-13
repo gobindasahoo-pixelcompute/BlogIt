@@ -62,6 +62,13 @@ const Sidebar = () => {
             >
               <i className="ri-list-check-2 text-xl" />
             </button>
+            <NavLink
+              activeClassName="bg-gray-200"
+              className="rounded-lg px-2 py-1"
+              to="/user_posts"
+            >
+              <i className="ri-folder-line text-xl" />
+            </NavLink>
           </div>
         </div>
         {userName && (

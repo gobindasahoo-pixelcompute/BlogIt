@@ -28,13 +28,13 @@ const Button = ({
       type={type}
       className={classnames(
         [className],
-        "group relative flex items-center justify-center gap-x-2 rounded border border-black text-sm  font-medium leading-5 transition duration-150 ease-in-out focus:outline-none",
+        "group relative flex items-center justify-center gap-x-2 rounded border text-sm  font-medium leading-5 transition duration-150 ease-in-out focus:outline-none",
         {
           "px-8 py-1": size === "medium",
           "px-2 py-1": size === "small",
           "bg-black text-white hover:bg-black/90":
             !loading && style === "primary",
-          "bg-white text-gray-800 hover:bg-gray-100":
+          "bg-gray-200 text-gray-800 hover:bg-gray-300":
             !loading && style === "secondary",
           "bg-gray-300 text-gray-800": loading,
           "cursor-wait": loading,
