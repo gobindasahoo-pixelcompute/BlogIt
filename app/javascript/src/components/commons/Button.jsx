@@ -30,7 +30,7 @@ const Button = ({
         [className],
         "group relative flex items-center justify-center gap-x-2 rounded border text-sm  font-medium leading-5 transition duration-150 ease-in-out focus:outline-none",
         {
-          "px-8 py-1": size === "medium",
+          "px-8 py-2": size === "medium",
           "px-2 py-1": size === "small",
           "bg-black text-white hover:bg-black/90":
             !loading && style === "primary",

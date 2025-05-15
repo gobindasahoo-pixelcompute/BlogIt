@@ -1,5 +1,7 @@
 import axios from "axios";
 
-const fetch = () => axios.get("/user_posts");
+import routes from "../routes";
+
+const fetch = params => axios.get(routes.userPosts, { params });
 
 export const userPostsApi = { fetch };

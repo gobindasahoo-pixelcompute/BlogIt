@@ -1,15 +1,21 @@
 import React from "react";
 
-import Header from "./Header";
-import Row from "./Row";
+import { Spinner, Table } from "@bigbinary/neetoui";
 
-const Table = ({ data }) => (
-  <div className="inline-block min-w-full">
-    <table className="min-w-full border-collapse border border-gray-300">
-      <Header />
-      <Row data={data} />
-    </table>
+const PostTable = ({
+  isLoading = false,
+  filteredColumns = [],
+  rowData = [],
+}) => (
+  <div className="inline-block w-[90%] lg:w-full">
+    {isLoading ? (
+      <div className="flex h-40 items-center justify-center">
+        <Spinner size="large" />
+      </div>
+    ) : (
+      <Table columnData={filteredColumns} rowData={rowData} />
+    )}
   </div>
 );
 
-export default Table;
+export default PostTable;

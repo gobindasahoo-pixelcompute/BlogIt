@@ -51,3 +51,6 @@ export const formatPublishTime = time => {
 
   return `${month} ${day} ${year}, ${timeString}`;
 };
+
+export const getCategoryIds = categories =>
+  categories.map(category => category.id);

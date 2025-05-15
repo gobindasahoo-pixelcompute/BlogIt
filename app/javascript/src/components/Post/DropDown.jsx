@@ -4,12 +4,14 @@ import { Down } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui";
 import classNames from "classnames";
 
-const DropDown = ({ defaultValue, onChange, handleSubmit, isChanged }) => {
-  const options = [
-    { label: "Publish", value: "publish" },
-    { label: "Save as draft", value: "draft" },
-  ];
-
+const DropDown = ({
+  defaultValue = "",
+  onChange,
+  handleSubmit,
+  isChanged = true,
+  options,
+  className,
+}) => {
   const [selectedLabel, setSelectedLabel] = useState(
     options.find(opt => opt.value === defaultValue)?.label
   );
@@ -34,7 +36,9 @@ const DropDown = ({ defaultValue, onChange, handleSubmit, isChanged }) => {
   }, [isChanged]);
 
   return (
-    <div className="relative inline-flex h-7 rounded bg-black text-white transition hover:bg-black/90">
+    <div
+      className={`relative inline-flex h-7 rounded bg-black text-white transition hover:bg-black/90 ${className}`}
+    >
       <Button
         disabled={disable}
         label={selectedLabel}

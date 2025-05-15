@@ -10,6 +10,7 @@ class Post < ApplicationRecord
   has_and_belongs_to_many :categories
   belongs_to :user
   belongs_to :organization
+  has_many :votes, dependent: :destroy
 
   validates :title,
     presence: true,
@@ -22,6 +23,10 @@ class Post < ApplicationRecord
   validate :slug_not_changed
 
   before_create :set_slug
+
+  def net_votes
+    self.votes.sum(&:value)
+  end
 
   private
 

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 import Form from "./Form";
 import Header from "./Header";
-import { formatPost } from "./utils";
+import { formatPost, getCategoryIds } from "./utils";
 
 import { categoriesApi } from "../../apis/categories";
 import postsApi from "../../apis/posts";
@@ -26,7 +26,7 @@ const EditPost = ({ history }) => {
       description: post.description,
       user_id: post?.user?.id,
       organization_id: post?.organization?.id,
-      category_ids: post.categories?.map(category => category.id),
+      category_ids: getCategoryIds(post.categories),
       status: post?.status,
     };
 
@@ -61,13 +61,11 @@ const EditPost = ({ history }) => {
   const isCategoriesChanged = () => {
     if (!initialPost?.categories || !post?.categories) return false;
 
-    const sortedInitialCategoriesId = initialPost.categories
-      .map(category => category.id)
-      .sort();
+    const sortedInitialCategoriesId = getCategoryIds(
+      initialPost.categories
+    ).sort();
 
-    const sortedPostCategoriesId = post.categories
-      .map(category => category.id)
-      .sort();
+    const sortedPostCategoriesId = getCategoryIds(post.categories).sort();
 
     return (
       JSON.stringify(sortedInitialCategoriesId) !==
