@@ -11,6 +11,7 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :organization
   has_many :votes, dependent: :destroy
+  has_one_attached :report
 
   validates :title,
     presence: true,

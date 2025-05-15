@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import { Edit } from "@bigbinary/neeto-icons";
+import { Download, Edit } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui";
 import { Container, PageLoader } from "components/commons";
 import { useHistory, useParams, Link } from "react-router-dom";
 
 import Category from "./Category";
+import DownloadReport from "./DownloadReport";
 import { formatDate } from "./utils";
 
 import postsApi from "../../apis/posts";
@@ -16,8 +17,12 @@ import PageTitle from "../commons/PageTitle";
 const ShowPost = () => {
   const [post, setPost] = useState({});
   const [pageLoading, setPageLoading] = useState(true);
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
+
   const { slug } = useParams();
+
   const history = useHistory();
+
   const userId = getFromLocalStorage("authUserId");
 
   const fetchPostDetails = async () => {
@@ -52,6 +57,12 @@ const ShowPost = () => {
             </div>
           )}
         </div>
+        <Button
+          icon={Download}
+          style="text"
+          tooltipProps={{ content: "Download PDF", position: "top" }}
+          onClick={() => setIsDownloadModalOpen(true)}
+        />
         {isOwner && (
           <Link className="my-auto" to={`/posts/${slug}/edit`}>
             <Button
@@ -70,6 +81,12 @@ const ShowPost = () => {
         </div>
       </div>
       <p className="mt-8">{post.description}</p>
+      {isDownloadModalOpen && (
+        <DownloadReport
+          description={`Generating PDF for ${post?.title}`}
+          setIsModalOpen={setIsDownloadModalOpen}
+        />
+      )}
     </Container>
   );
 };
