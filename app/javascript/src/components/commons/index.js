@@ -4,6 +4,7 @@ import Input from "./Input";
 import PageLoader from "./PageLoader";
 import PageTitle from "./PageTitle";
 import PrivateRoute from "./PrivateRoute";
+import ProgressBar from "./ProgressBar";
 import Sidebar from "./Sidebar";
 import Textarea from "./Textarea";
 
@@ -16,4 +17,5 @@ export {
   Sidebar,
   Textarea,
   PrivateRoute,
+  ProgressBar,
 };

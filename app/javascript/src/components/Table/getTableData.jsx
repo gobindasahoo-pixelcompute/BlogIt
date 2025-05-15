@@ -47,8 +47,8 @@ const getRowData = ({ posts, selectedRows, handleSelectRow, handleAction }) =>
       </Link>
     ),
     category: post.categories.map(category => category.name).join(", "),
-    published_at: post.updated_at
-      ? formatPublishTime(post.updated_at)
+    published_at: post.published_at
+      ? formatPublishTime(post.published_at)
       : "Not published",
     status: post.status === "draft" ? "Draft" : "Published",
     action: (
