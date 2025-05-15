@@ -4,7 +4,7 @@ import { Container, PageTitle } from "components/commons";
 
 import Form from "./Form";
 import Header from "./Header";
-import { formatPost } from "./utils";
+import { formatPost, getCategoryIds } from "./utils";
 
 import { categoriesApi } from "../../apis/categories";
 import postsApi from "../../apis/posts";
@@ -17,9 +17,7 @@ const CreatePost = ({ history }) => {
   const [post, setPost] = useState({
     title: "",
     description: "",
-    user_id: userId,
-    organization_id: organizationId,
-    category_ids: [],
+    categories: [],
     status: "draft",
   });
   const [loading, setLoading] = useState(false);
@@ -29,7 +27,15 @@ const CreatePost = ({ history }) => {
     event.preventDefault();
     setLoading(true);
     try {
-      await postsApi.create(formatPost(post));
+      const updatedPost = {
+        title: post.title,
+        description: post.description,
+        user_id: userId,
+        organization_id: organizationId,
+        category_ids: getCategoryIds(post.categories),
+        status: post?.status,
+      };
+      await postsApi.create(formatPost(updatedPost));
       setLoading(false);
       history.push("/");
     } catch (error) {
@@ -46,7 +52,7 @@ const CreatePost = ({ history }) => {
   };
 
   const isPostEmpty =
-    !post.title.trim() || !post.description.trim() || !post.category_ids.length;
+    !post.title.trim() || !post.description.trim() || !post.categories.length;
 
   useEffect(() => {
     fetchCategories();

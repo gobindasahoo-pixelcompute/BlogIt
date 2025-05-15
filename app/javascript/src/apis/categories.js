@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const fetch = () => axios.get("/categories");
+import routes from "../routes";
 
-const create = payload => axios.post("/categories", { category: payload });
+const fetch = () => axios.get(routes.categories);
+
+const create = payload => axios.post(routes.categories, { category: payload });
 
 export const categoriesApi = { fetch, create };

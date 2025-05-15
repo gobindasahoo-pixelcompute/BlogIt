@@ -21,6 +21,10 @@ const Header = ({
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const history = useHistory();
+  const options = [
+    { label: "Publish", value: "publish" },
+    { label: "Save as draft", value: "draft" },
+  ];
 
   const handleDelete = async () => {
     await postsApi.destroy(slug);
@@ -50,6 +54,7 @@ const Header = ({
           defaultValue={post?.status}
           handleSubmit={handleSubmit}
           isChanged={isChanged}
+          options={options}
           onChange={selectedValue =>
             setPost(prev => ({ ...prev, status: selectedValue }))
           }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { NoData } from "@bigbinary/neetoui";
 import Logger from "js-logger";
+import { isEmpty } from "ramda";
 import { Link } from "react-router-dom";
 import { getFromLocalStorage } from "utils/storage";
 
@@ -47,7 +48,7 @@ const List = () => {
         </Link>
       </div>
       <div className="h-[90%] overflow-y-scroll">
-        {posts.length > 0 ? (
+        {!isEmpty(posts) ? (
           posts.map(post => <Card key={post.id} {...post} />)
         ) : (
           <div className="flex h-full items-center justify-center">

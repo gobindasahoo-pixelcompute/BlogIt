@@ -33,6 +33,7 @@ const Category = () => {
       setError(error);
     } finally {
       setIsModalOpen(false);
+      setCategory("");
     }
   };
 

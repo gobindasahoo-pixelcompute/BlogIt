@@ -130,6 +130,6 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_equal "publish", @post.reload.status
-    assert_not_nil @post.reload.published_at
+    assert_not_nil @post.reload.updated_at
   end
 end

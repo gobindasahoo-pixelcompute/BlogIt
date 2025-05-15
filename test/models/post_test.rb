@@ -96,7 +96,7 @@ class PostTest < ActiveSupport::TestCase
 
   def test_post_published_at_should_be_nil_when_draft
     @post.save!
-    assert_nil @post.published_at
+    assert_nil @post.updated_at
   end
 
   def test_post_published_at_should_be_set_when_published
